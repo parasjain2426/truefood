@@ -37,7 +37,7 @@ export const Home = () => {
     console.log(data);
   };
   return (
-    <div
+    <header
       style={{
         width: "100%",
         height: "40%",
@@ -133,6 +133,6 @@ export const Home = () => {
           </form>
         </div>
       </main>
-    </div>
+    </header>
   );
 };
