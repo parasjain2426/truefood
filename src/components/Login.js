@@ -1,12 +1,12 @@
 import { Button, TextField } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { useHistory } from "react-router-dom";
-import { containerStyle } from "./components-styles/containerStyle";
-export const Login = (props) => {
-  // console.log(props);
-  const { push } = useHistory();
+import "./components-styles/containerStyle.css";
+
+export const Login = ({ active, setActive }) => {
+  // const { push, goBack } = useHistory();
   const {
     register,
     formState: { errors },
@@ -18,11 +18,14 @@ export const Login = (props) => {
   };
 
   return (
-    <div style={containerStyle}>
+    <div
+      className="containerStyle"
+      style={{ display: active ? "block" : "none" }}
+    >
       <div style={cardStyle}>
         <AiFillCloseCircle
           style={{ float: "right" }}
-          onClick={() => push("/")}
+          onClick={() => setActive(false)}
         />
         <h1 style={{ textAlign: "left" }}>Login</h1>
         <form onSubmit={handleSubmit(submitHandler)}>
@@ -66,5 +69,6 @@ const cardStyle = {
   margin: "5% auto",
   padding: "20px",
   maxWidth: "350px",
-  top: "50%"
+  top: "50%",
+  overflow: "auto"
 };

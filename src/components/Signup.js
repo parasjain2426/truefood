@@ -1,5 +1,5 @@
-import React from "react";
-import { Controller, useForm } from "react-hook-form";
+import React, { useState } from "react";
+import { Controller, set, useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { AiFillCloseCircle } from "react-icons/ai";
@@ -13,11 +13,10 @@ import {
   TextField
 } from "@material-ui/core";
 import { toast } from "react-toastify";
-import { containerStyle } from "./components-styles/containerStyle";
+import "./components-styles/containerStyle.css";
 
 toast.configure();
-export const Signup = (props) => {
-  const { push } = useHistory();
+export const Signup = ({ active, setActive }) => {
   const {
     register,
     formState: { errors },
@@ -40,11 +39,14 @@ export const Signup = (props) => {
   };
 
   return (
-    <div style={containerStyle}>
+    <div
+      className="containerStyle"
+      style={{ display: active ? "block" : "none" }}
+    >
       <div style={cardStyle}>
         <AiFillCloseCircle
           style={{ float: "right" }}
-          onClick={() => push("/")}
+          onClick={() => setActive(false)}
         />
         <h1 style={{ textAlign: "left" }}>SignUp</h1>
         <form onSubmit={handleSubmit(submitHandler)}>
