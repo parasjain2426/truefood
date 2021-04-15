@@ -2,20 +2,12 @@ import React from "react";
 import "../components-styles/options.css";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { OrderRouter } from "../../routers/OrderRouter";
+import "../components-styles/optionContainerStyle.css";
 
 export const TrueOptions = () => {
   return (
     <Router>
-      <div
-        style={{
-          position: "absolute",
-          top: "55%",
-          width: "100%",
-          display: "flex",
-          justifyContent: "center"
-          // margin: "0px auto"
-        }}
-      >
+      <div className="optionContainerStyle">
         <Link style={{ textDecoration: "none" }} to="/orderOnline">
           <div className="option" style={orderOnlineStyle}>
             <div style={optionHeading}>

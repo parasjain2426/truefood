@@ -30,12 +30,14 @@ export const Signup = ({ active, setActive }) => {
     }
     return false;
   };
-  const submitHandler = (data) => {
+  const submitHandler = (data, e) => {
     toast.success("SignedUp Succesfully!", {
       position: "bottom-center",
       hideProgressBar: true
     });
     console.log(data);
+    e.target.reset();
+    setActive(false);
   };
 
   return (

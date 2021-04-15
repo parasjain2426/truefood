@@ -1,12 +1,15 @@
 import { Button } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useRouteMatch } from "react-router-dom";
+import { logOutUser } from "../actions/actionCreator";
+import { LogInContext } from "../contexts/LogInContext";
 import "./components-styles/containerStyle.css";
 import { Login } from "./Login";
 import { Signup } from "./Signup";
 import { SearchBox } from "./sub-components/SearchBox";
 
 export const OrderOnline = (props) => {
+  const [state, dispatch] = useContext(LogInContext);
   const [isSignupActive, setIsSignupActive] = useState(false);
   const [isLoginActive, setIsLoginActive] = useState(false);
   const { path } = useRouteMatch();
@@ -44,10 +47,25 @@ export const OrderOnline = (props) => {
           <em>true</em>FOOD
           <p style={{ fontSize: "0.5em" }}>Deliever best at your doorsteps!</p>
         </h1>
-        <div style={{ float: "right", marginRight: "20px" }}>
+        <nav
+          style={{
+            float: "right",
+            marginRight: "20px",
+            display: state.isLoggedIn ? "none" : "block"
+          }}
+        >
           <Button onClick={() => logInHandler(true)}>Login</Button>
           <Button onClick={() => signUpHandler(true)}>Signup</Button>
-        </div>
+        </nav>
+        <nav
+          style={{
+            float: "right",
+            marginRight: "20px",
+            display: state.isLoggedIn ? "block" : "none"
+          }}
+        >
+          <Button onClick={() => dispatch(logOutUser())}>Logout</Button>
+        </nav>
         <div
           style={{
             width: "480px",

@@ -1,57 +1,74 @@
-import React, { useState } from "react";
-import { FiLogIn } from "react-icons/fi";
+import React, { useContext, useEffect, useState } from "react";
 import { IoMdCreate } from "react-icons/io";
+import { FiLogIn } from "react-icons/fi";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import { ChildrenRouter } from "../../routers/ChildrenRouter";
 import { SearchBox } from "./SearchBox";
+import { Login } from "../Login";
+import { Signup } from "../Signup";
+import "../components-styles/headerStyle.css";
+import { LogInContext } from "../../contexts/LogInContext";
+import { logOutUser } from "../../actions/actionCreator";
 
 export const TrueHeader = (props) => {
   // console.log(props);
   // console.log("from header");
-
+  const [state, dispatch] = useContext(LogInContext);
+  const [isSignupActive, setIsSignupActive] = useState(false);
+  const [isLoginActive, setIsLoginActive] = useState(false);
   const [serveDestination, setServeDestination] = useState("India");
+
+  const signUpHandler = (value) => {
+    setIsSignupActive(value);
+  };
+
+  const logInHandler = (value) => {
+    setIsLoginActive(value);
+  };
 
   return (
     <Router>
-      <header
-        style={{
-          width: "100%",
-          height: "45%",
-          minHeight: "250px",
-          background: `linear-gradient(
-          rgba(0, 0, 0, 0.52),
-          rgba(0, 0, 0, 0.5)
-      ),url("https://cutt.ly/AviDdUf")`,
-          backgroundPosition: "center",
-          margin: "0px",
-          padding: "10px",
-          position: "absolute",
-          left: "0px",
-          top: "0px"
-        }}
-      >
-        <nav style={{ float: "right" }}>
-          <Link to="/login" style={{ textDecoration: "none" }}>
-            <Button
-              color="primary"
-              variant="contained"
-              style={{ margin: "10px 20px" }}
-            >
-              <FiLogIn style={{ marginRight: "5px" }} />
-              Login
-            </Button>
-          </Link>
-          <Link to="/signup" style={{ textDecoration: "none" }}>
-            <Button
-              color="primary"
-              variant="contained"
-              style={{ margin: "10px 20px 10px 10px" }}
-            >
-              <IoMdCreate style={{ marginRight: "5px" }} />
-              Signup
-            </Button>
-          </Link>
+      <header className="headerStyle">
+        <nav
+          style={{
+            float: "right",
+            display: state.isLoggedIn ? "none" : "block"
+          }}
+        >
+          <Button
+            color="primary"
+            variant="contained"
+            style={{ margin: "10px 20px" }}
+            onClick={() => logInHandler(true)}
+          >
+            <FiLogIn style={{ marginRight: "5px" }} />
+            Login
+          </Button>
+          <Button
+            color="primary"
+            variant="contained"
+            style={{ margin: "10px 20px 10px 10px" }}
+            onClick={() => signUpHandler(true)}
+          >
+            <IoMdCreate style={{ marginRight: "5px" }} />
+            Signup
+          </Button>
+        </nav>
+        <nav
+          style={{
+            float: "right",
+            display: state.isLoggedIn ? "block" : "none"
+          }}
+        >
+          <Button
+            color="primary"
+            variant="contained"
+            style={{ margin: "10px 20px" }}
+            onClick={() => dispatch(logOutUser())}
+          >
+            Logout
+          </Button>
         </nav>
         <main style={{ clear: "both", textAlign: "center", color: "white" }}>
           <h1
@@ -68,6 +85,8 @@ export const TrueHeader = (props) => {
         </main>
       </header>
       <ChildrenRouter />
+      <Login active={isLoginActive} setActive={logInHandler} />
+      <Signup active={isSignupActive} setActive={signUpHandler} />
     </Router>
   );
 };

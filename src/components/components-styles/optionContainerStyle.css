@@ -1,0 +1,17 @@
+.optionContainerStyle {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+@media screen and (max-width: 720px) {
+  .optionContainerStyle {
+    top: 60%;
+  }
+}
+@media screen and (max-height: 480px) {
+  .optionContainerStyle {
+    top: 80%;
+  }
+}
