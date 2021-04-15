@@ -1,0 +1,13 @@
+.option {
+  width: 35vw;
+  min-width: 200px;
+  height: 250px;
+  position: relative;
+  margin: 0px 10px;
+  display: flex;
+  align-items: flex-end;
+  border-radius: 5%;
+}
+.option:hover {
+  box-shadow: 5px 10px 10px 5px #888888;
+}

@@ -3,7 +3,7 @@ import { Home } from "../components/Home";
 export const ParentRouter = () => {
   return (
     <Switch>
-      <Route path="/" component={Home} />
+      <Route exact path="/" component={Home} />
     </Switch>
   );
 };
