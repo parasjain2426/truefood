@@ -1,0 +1,8 @@
+.shopStyle {
+  height: max-content;
+  width: 300px;
+}
+
+.shopStyle:hover {
+  cursor: pointer;
+}

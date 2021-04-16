@@ -1,0 +1,11 @@
+.foodStoresStyle {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+@media screen and (max-width: 720px) {
+  .foodStoresStyle {
+    flex-direction: column;
+    align-items: center;
+  }
+}
