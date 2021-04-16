@@ -12,6 +12,13 @@
 @media screen and (max-width: 720px) and (max-width: 480px) {
   .searchBoxStyle {
     width: 300px;
-    margin: 10px auto;
+    margin: 0px auto;
+  }
+}
+
+@media screen and (max-width: 240px) {
+  .searchBoxStyle {
+    width: 200px;
+    margin: 0px auto;
   }
 }
