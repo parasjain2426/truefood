@@ -44,7 +44,7 @@ export const Footer = () => {
               <p>Security</p>
               <p>Terms</p>
             </p>
-            <p>
+            <div>
               <b>Social links</b>
               <div>
                 <AiFillFacebook />
@@ -55,7 +55,7 @@ export const Footer = () => {
                 <AiFillApple />
                 <FaGooglePlay />
               </div>
-            </p>
+            </div>
           </div>
         </div>
       </div>
