@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { IoMdCreate } from "react-icons/io";
 import { FiLogIn } from "react-icons/fi";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
-import { ChildrenRouter } from "../../routers/ChildrenRouter";
 import { SearchBox } from "./SearchBox";
 import { Login } from "../Login";
 import { Signup } from "../Signup";
@@ -28,7 +27,7 @@ export const TrueHeader = (props) => {
   };
 
   return (
-    <Router>
+    <Fragment>
       <header className="headerStyle">
         <nav
           style={{
@@ -84,9 +83,8 @@ export const TrueHeader = (props) => {
           <SearchBox setServeDestination={setServeDestination} />
         </main>
       </header>
-      <ChildrenRouter />
       <Login active={isLoginActive} setActive={logInHandler} />
       <Signup active={isSignupActive} setActive={signUpHandler} />
-    </Router>
+    </Fragment>
   );
 };

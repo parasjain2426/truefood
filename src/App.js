@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import { LogInContext } from "./contexts/LogInContext";
 import { loginState } from "./initialStates/loginState";
 import { logInReducer } from "./reducers/logInReducer";

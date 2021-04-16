@@ -1,8 +1,8 @@
 import React from "react";
-import { Shop } from "./Shop";
 import "../components-styles/foodStoresStyle.css";
+import { ShopCard } from "./ShopCard";
 
-export const FoodStores = () => {
+export const FoodStores = ({ baseUrl }) => {
   const shopes = [
     {
       imgUrl: "https://cutt.ly/vvhkKSB",
@@ -22,7 +22,7 @@ export const FoodStores = () => {
   return (
     <div className="foodStoresStyle">
       {shopes.map((shop) => (
-        <Shop shop={shop} key={shop.imgUrl} />
+        <ShopCard shop={shop} baseUrl={baseUrl} key={shop.imgUrl} />
       ))}
     </div>
   );

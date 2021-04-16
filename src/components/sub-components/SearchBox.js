@@ -9,6 +9,7 @@ import {
   FormHelperText
 } from "@material-ui/core";
 import { ImLocation } from "react-icons/im";
+import "../components-styles/searchBoxStyle.css";
 
 export const SearchBox = (props) => {
   const {
@@ -36,21 +37,13 @@ export const SearchBox = (props) => {
     console.log(data);
   };
   return (
-    <div
-      style={{
-        backgroundColor: "white",
-        width: "450px",
-        minWidth: "150px",
-        margin: "0 auto",
-        padding: "2px"
-      }}
-    >
+    <div className="searchBoxStyle">
       <ImLocation
         color="black"
         style={{ float: "left", height: "4em", marginLeft: "10px" }}
       />
       <form
-        style={{ width: "450px", margin: "0px" }}
+        style={{ width: "90%", margin: "0px" }}
         onSubmit={handleSubmit(submitHandler)}
       >
         <FormControl
@@ -83,8 +76,8 @@ export const SearchBox = (props) => {
           <FormHelperText>{errors?.city?.message}</FormHelperText>
         </FormControl>
         <TextField
-          label="Search for restaurants"
-          style={{ margin: "0px 10px", minWidth: "60%", width: "150px" }}
+          label="Restaurants nearby"
+          style={{ margin: "0px 10px", minWidth: "150px", width: "60%" }}
           {...register("location", {
             validate: locationValidator,
             required: "Please fill the restaurant name"
