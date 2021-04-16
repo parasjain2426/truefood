@@ -42,7 +42,7 @@ export const OrderOnline = (props) => {
         <FoodInspirations />
         <h2>{option}</h2>
         <FoodStores baseUrl={url} />
-        <Footer position="relative" />
+        <Footer />
         <Login active={isLoginActive} setActive={logInHandler} />
         <Signup active={isSignupActive} setActive={signUpHandler} />
       </div>

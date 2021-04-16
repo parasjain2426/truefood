@@ -8,9 +8,9 @@ import {
 import { FaGooglePlay } from "react-icons/fa";
 import "../components-styles/footerStyle.css";
 
-export const Footer = ({ position }) => {
+export const Footer = () => {
   return (
-    <div className="footer" style={{ position: position }}>
+    <div className="footer">
       <div>
         <div className="footer-content">
           <h3
