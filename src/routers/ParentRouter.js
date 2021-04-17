@@ -1,4 +1,5 @@
 import { Route, Switch } from "react-router-dom";
+import { DefaultError } from "../components/DefaultError";
 import { Home } from "../components/Home";
 import { OrderOnline } from "../components/OrderOnline";
 import { Shop } from "../components/Shop";
@@ -11,6 +12,7 @@ export const ParentRouter = () => {
       <Route exact path="/outMeal" component={OrderOnline} />
       <Route path="/orderOnline/:ShopName" component={Shop} />
       <Route path="/outMeal/:ShopName" component={Shop} />
+      <Route path="*" component={DefaultError} />
     </Switch>
   );
 };

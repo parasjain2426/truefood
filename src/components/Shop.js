@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Rating } from "@material-ui/lab";
 import { Login } from "./Login";
 import { Signup } from "./Signup";
@@ -6,24 +6,27 @@ import "./components-styles/containerStyle.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/components-styles/shopButtonStyle.css";
 import { SecondaryHeader } from "./sub-components/SecondaryHeader";
-import { Link, useLocation, useRouteMatch } from "react-router-dom";
+import { Link, Redirect, useLocation, useRouteMatch } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import { OrderRouter } from "../routers/OrderRouter";
+import { toast } from "react-toastify";
+import { LogInContext } from "../contexts/LogInContext";
 
+toast.configure();
 export const Shop = (props) => {
   const [isSignupActive, setIsSignupActive] = useState(false);
   const [isLoginActive, setIsLoginActive] = useState(false);
+  const [isContent, setIsContent] = useState(true);
+  const [state] = useContext(LogInContext);
   const { shopData } = useLocation();
-  const [shop, setShop] = useState(shopData);
+  const [shop, setShop] = useState({});
   const { url } = useRouteMatch();
-  const { imgUrl, name, variety, price, rating } = shop;
 
   useEffect(() => {
-    console.log("Hii");
     if (shopData) {
-      localStorage.setItem("shop", shopData);
+      setShop(shopData);
     } else {
-      setShop(localStorage.getItem("shop"));
+      setIsContent(false);
     }
   }, []);
 
@@ -34,6 +37,37 @@ export const Shop = (props) => {
   const logInHandler = (value) => {
     setIsLoginActive(value);
   };
+
+  const reviewHandler = () => {
+    if (state.isLoggedIn) {
+      toast.success("Added review successfully", {
+        position: "bottom-center"
+      });
+    } else {
+      setIsLoginActive(true);
+    }
+  };
+
+  const bookmarkHandler = () => {
+    if (state.isLoggedIn) {
+      toast.success("Added bookmark successfully", {
+        position: "bottom-center"
+      });
+    } else {
+      setIsLoginActive(true);
+    }
+  };
+
+  const shareHandler = () => {
+    if (state.isLoggedIn) {
+      toast.success("Shared successfully", {
+        position: "bottom-center"
+      });
+    } else {
+      setIsLoginActive(true);
+    }
+  };
+
   return (
     <div className="containerStyle">
       <div style={boxStyle}>
@@ -45,8 +79,8 @@ export const Shop = (props) => {
           <div className="row">
             <div className="col-8">
               <img
-                src={imgUrl}
-                alt={name}
+                src={shop.imgUrl}
+                alt={shop.name}
                 style={{ width: "100%", height: "100%" }}
               />
             </div>
@@ -54,15 +88,15 @@ export const Shop = (props) => {
               <div className="row">
                 <div className="col-md-6">
                   <img
-                    src={imgUrl}
-                    alt={name}
+                    src={shop.imgUrl}
+                    alt={shop.name}
                     style={{ width: "100%", height: "100%" }}
                   />
                 </div>
                 <div className="col-md-6">
                   <img
-                    src={imgUrl}
-                    alt={name}
+                    src={shop.imgUrl}
+                    alt={shop.name}
                     style={{ width: "100%", height: "100%" }}
                   />
                 </div>
@@ -73,26 +107,34 @@ export const Shop = (props) => {
                 style={{ padding: "0px", marginTop: "10px" }}
               >
                 <img
-                  src={imgUrl}
-                  alt={name}
+                  src={shop.imgUrl}
+                  alt={shop.name}
                   style={{ width: "100%", height: "100%" }}
                 />
               </div>
             </div>
           </div>
           <div style={{ textAlign: "left" }}>
-            <h1>{name}</h1>
-            <Rating name="disabled" value={rating} disabled />
-            <h4>{variety.join(", ")}</h4>
-            <p>{price}</p>
+            <h1>{shop.name}</h1>
+            <Rating name="disabled" value={shop.rating} disabled />
+            <h4>{shop?.variety?.join(", ")}</h4>
+            <p>{shop.price}</p>
           </div>
           <div className="shopButtonStyle">
-            <Button variant="contained" color="secondary">
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={reviewHandler}
+            >
               Add Review
             </Button>
             <Button variant="outlined">Direction</Button>
-            <Button variant="outlined">BookMark</Button>
-            <Button variant="outlined">Share</Button>
+            <Button variant="outlined" onClick={bookmarkHandler}>
+              BookMark
+            </Button>
+            <Button variant="outlined" onClick={shareHandler}>
+              Share
+            </Button>
           </div>
           <div
             style={{
@@ -113,6 +155,7 @@ export const Shop = (props) => {
         </div>
         <Login active={isLoginActive} setActive={logInHandler} />
         <Signup active={isSignupActive} setActive={signUpHandler} />
+        <div>{isContent ? null : <Redirect to="/error" />}</div>
       </div>
     </div>
   );
