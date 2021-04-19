@@ -1,7 +1,6 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import { IoMdCreate } from "react-icons/io";
 import { FiLogIn } from "react-icons/fi";
-import { BrowserRouter as Router, Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import { SearchBox } from "./SearchBox";
 import { Login } from "../Login";

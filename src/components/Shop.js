@@ -5,6 +5,7 @@ import { Signup } from "./Signup";
 import "./components-styles/containerStyle.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/components-styles/shopButtonStyle.css";
+import "../components/components-styles/orderChildStyle.css";
 import { SecondaryHeader } from "./sub-components/SecondaryHeader";
 import { Link, Redirect, useLocation, useRouteMatch } from "react-router-dom";
 import { Button } from "@material-ui/core";
@@ -101,6 +102,7 @@ export const Shop = (props) => {
         dispatchOrders(modifyQuantity(order.id, 1));
         return true;
       });
+      setShowProcessedOrders(false);
       toast.success("Orders booked successfully", {
         position: "top-center"
       });
@@ -239,11 +241,9 @@ export const Shop = (props) => {
             </ul>
           </div>
           <div
+            className="orderChildStyle"
             style={{
-              width: "100%",
-              display: processedOrders.length > 0 ? "block" : "none",
-              backgroundColor: "#F5F5F5",
-              height: "10%"
+              display: processedOrders.length > 0 ? "block" : "none"
             }}
           >
             <div
