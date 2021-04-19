@@ -5,6 +5,7 @@ import "../components-styles/shopStyle.css";
 
 export const ShopCard = (props) => {
   const { imgUrl, name, variety, price, rating } = props.shop;
+
   return (
     <div className="shopStyle">
       <Link

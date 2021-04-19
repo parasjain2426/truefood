@@ -23,27 +23,27 @@ export const Footer = () => {
           </h3>
           <p>trueFood is a registered company under Hexaview Tech Pvt. Ltd.</p>
           <div className="sub">
-            <p>
+            <div>
               <b>Company</b>
               <p>About</p>
               <p>Blog</p>
-            </p>
-            <p>
+            </div>
+            <div>
               <b>For Foodies</b>
               <p>Code of conduct</p>
               <p>Community</p>
-            </p>
-            <p>
+            </div>
+            <div>
               <b>For Restaurant</b>
               <p>Restaurant</p>
               <p>Business</p>
-            </p>
-            <p>
+            </div>
+            <div>
               <b>For You</b>
               <p>Privacy</p>
               <p>Security</p>
               <p>Terms</p>
-            </p>
+            </div>
             <div>
               <b>Social links</b>
               <div>

@@ -4,12 +4,15 @@ import { OrderChild } from "../components/sub-components/OrderChild";
 import { OverviewChild } from "../components/sub-components/OverviewChild";
 import { PhotosChild } from "../components/sub-components/PhotosChild";
 import { ReviewChild } from "../components/sub-components/ReviewChild";
-export const OrderRouter = () => {
+export const OrderRouter = ({ orderUpdate }) => {
   // console.log(props);
   return (
     <Switch>
       <Route path="/orderOnline/:ShopName/overview" component={OverviewChild} />
-      <Route path="/orderOnline/:ShopName/order" component={OrderChild} />
+      <Route
+        path="/orderOnline/:ShopName/order"
+        render={() => <OrderChild orderUpdate={orderUpdate} />}
+      />
       <Route path="/orderOnline/:ShopName/menu" component={MenuChild} />
       <Route path="/orderOnline/:ShopName/photos" component={PhotosChild} />
       <Route path="/orderOnline/:ShopName/reviews" component={ReviewChild} />

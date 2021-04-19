@@ -1,4 +1,9 @@
 import React from "react";
+import "../components-styles/shopChildStyle.css";
 export const OverviewChild = () => {
-  return <h1>Hii Overview</h1>;
+  return (
+    <div className="shop-child">
+      <h1>Hii Overview</h1>
+    </div>
+  );
 };

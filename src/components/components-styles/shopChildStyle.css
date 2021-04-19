@@ -1,0 +1,6 @@
+.shop-child {
+  margin: 0 auto;
+  height: 40%;
+  min-height: 300px;
+  overflow: auto;
+}
