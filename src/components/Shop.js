@@ -22,6 +22,7 @@ import { LogInContext } from "../contexts/LogInContext";
 import { orderReducer } from "../reducers/orderReducer";
 import { initialOrders } from "../initialStates/initialOrders";
 import { modifyQuantity, processOrder } from "../actions/actionCreator";
+import { useSpring, animated } from "react-spring";
 
 toast.configure();
 export const Shop = (props) => {
@@ -35,6 +36,15 @@ export const Shop = (props) => {
   const { shopData } = useLocation();
   const [shop, setShop] = useState({});
   const { url } = useRouteMatch();
+  const yourOrderStyle = useSpring({
+    width: "100%",
+    display: showProcessedOrders ? "block" : "none",
+    backgroundColor: "#F5F5F5",
+    height: "40%",
+    overflow: "auto",
+    padding: "10px",
+    opacity: showProcessedOrders ? 1 : 0
+  });
   useEffect(() => {
     if (shopData) {
       setShop(shopData);
@@ -245,16 +255,7 @@ export const Shop = (props) => {
           <Login active={isLoginActive} setActive={logInHandler} />
           <Signup active={isSignupActive} setActive={signUpHandler} />
           <div>{isContent ? null : <Redirect to="/error" />}</div>
-          <div
-            style={{
-              width: "100%",
-              display: showProcessedOrders ? "block" : "none",
-              backgroundColor: "#F5F5F5",
-              height: "40%",
-              overflow: "auto",
-              padding: "10px"
-            }}
-          >
+          <animated.div style={yourOrderStyle}>
             <h3>Your Orders</h3>
             <ul style={{ listStyle: "none", margin: "10px" }}>
               {processedOrders.map((processedOrder) => (
@@ -275,7 +276,7 @@ export const Shop = (props) => {
                 </li>
               ))}
             </ul>
-          </div>
+          </animated.div>
           <div
             className="orderChildStyle"
             style={{
