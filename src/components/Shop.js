@@ -7,7 +7,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/components-styles/shopButtonStyle.css";
 import "../components/components-styles/orderChildStyle.css";
 import { SecondaryHeader } from "./sub-components/SecondaryHeader";
-import { Link, Redirect, useLocation, useRouteMatch } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  Redirect,
+  useLocation,
+  useRouteMatch
+} from "react-router-dom";
 import { Button } from "@material-ui/core";
 import { OrderRouter } from "../routers/OrderRouter";
 import { toast } from "react-toastify";
@@ -198,11 +204,41 @@ export const Shop = (props) => {
                 alignItems: "flex-end"
               }}
             >
-              <Link to={`${url}/overview`}>Overview</Link>
-              <Link to={`${url}/order`}>Order Online</Link>
-              <Link to={`${url}/reviews`}>Reviews</Link>
-              <Link to={`${url}/menu`}>Menu</Link>
-              <Link to={`${url}/photos`}>Photos</Link>
+              <NavLink
+                to={`${url}/overview`}
+                className="link"
+                activeClassName="main-link-nav"
+              >
+                Overview
+              </NavLink>
+              <NavLink
+                to={`${url}/order`}
+                className="link"
+                activeClassName="main-link-nav"
+              >
+                Order Online
+              </NavLink>
+              <NavLink
+                to={`${url}/reviews`}
+                className="link"
+                activeClassName="main-link-nav"
+              >
+                Reviews
+              </NavLink>
+              <NavLink
+                to={`${url}/menu`}
+                className="link"
+                activeClassName="main-link-nav"
+              >
+                Menu
+              </NavLink>
+              <NavLink
+                to={`${url}/photos`}
+                className="link"
+                activeClassName="main-link-nav"
+              >
+                Photos
+              </NavLink>
             </div>
             <OrderRouter />
           </div>

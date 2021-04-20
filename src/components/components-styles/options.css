@@ -8,8 +8,21 @@
   align-items: flex-end;
   border-radius: 15px;
 }
+
+.orderOnline {
+  background: url("https://cutt.ly/Nvao8eR");
+  background-position: center;
+  background-size: cover;
+}
+
+.outMeal {
+  background: url("https://cutt.ly/qvapWLm");
+  background-position: center;
+  background-size: cover;
+}
+
 .option:hover {
-  box-shadow: 5px 10px 10px 5px #888888;
+  box-shadow: 2px 2px 20px 10px rgba(0, 0, 0, 0.2);
 }
 
 .optionHeading {
@@ -22,6 +35,6 @@
 
 @media screen and (max-width: 720px) {
   .optionHeading {
-    height: 120px;
+    height: 130px;
   }
 }
