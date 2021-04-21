@@ -1,4 +1,11 @@
-import React, { useContext, useEffect, useReducer, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useReducer,
+  useMemo,
+  useState
+} from "react";
 import { Rating } from "@material-ui/lab";
 import { Login } from "./Login";
 import { Signup } from "./Signup";
@@ -53,31 +60,24 @@ export const Shop = (props) => {
     }
   }, []);
 
-  const processedOrderHandler = () => {
-    var processed = orders.filter((order) => order.isprocessed === true);
-    return processed;
-  };
-  const subTotalHandler = () => {
-    var sum = 0;
-    var subTotal = processedOrders.map((order) => {
-      return Number(order.price) * order.quantity;
-    });
-    sum = subTotal.length > 0 ? subTotal.reduce(finalPrice) : 0;
-    return sum;
-  };
-
   const finalPrice = (total, num) => {
     return total + num;
   };
-  const signUpHandler = (value) => {
-    setIsSignupActive(value);
-  };
+  const signUpHandler = useCallback(
+    (value) => {
+      setIsSignupActive(value);
+    },
+    [isSignupActive]
+  );
 
-  const logInHandler = (value) => {
-    setIsLoginActive(value);
-  };
+  const logInHandler = useCallback(
+    (value) => {
+      setIsLoginActive(value);
+    },
+    [isLoginActive]
+  );
 
-  const reviewHandler = () => {
+  const reviewHandler = useCallback(() => {
     if (state.isLoggedIn) {
       toast.success("Added review successfully", {
         position: "bottom-center"
@@ -85,9 +85,9 @@ export const Shop = (props) => {
     } else {
       setIsLoginActive(true);
     }
-  };
+  }, [state, isLoginActive]);
 
-  const bookmarkHandler = () => {
+  const bookmarkHandler = useCallback(() => {
     if (state.isLoggedIn) {
       toast.success("Added bookmark successfully", {
         position: "bottom-center"
@@ -95,9 +95,9 @@ export const Shop = (props) => {
     } else {
       setIsLoginActive(true);
     }
-  };
+  }, [state, isLoginActive]);
 
-  const shareHandler = () => {
+  const shareHandler = useCallback(() => {
     if (state.isLoggedIn) {
       toast.success("Shared successfully", {
         position: "bottom-center"
@@ -105,13 +105,13 @@ export const Shop = (props) => {
     } else {
       setIsLoginActive(true);
     }
-  };
+  }, [state, isLoginActive]);
 
-  const showProcessedOrderHandler = () => {
+  const showProcessedOrderHandler = useCallback(() => {
     setShowProcessedOrders(!showProcessedOrders);
-  };
+  }, [showProcessedOrders]);
 
-  const buyOrderHandler = () => {
+  const buyOrderHandler = useCallback(() => {
     if (state.isLoggedIn) {
       processedOrders.map((order) => {
         dispatchOrders(processOrder(order.id, false));
@@ -125,10 +125,14 @@ export const Shop = (props) => {
     } else {
       setIsLoginActive(true);
     }
-  };
+  }, [ordersState, state, showProcessedOrders, isLoginActive]);
 
-  var processedOrders = processedOrderHandler();
-  var subTotal = subTotalHandler();
+  const processedOrders = orders.filter((order) => order.isprocessed === true);
+  const subTotal = processedOrders
+    .map((order) => {
+      return Number(order.price) * order.quantity;
+    })
+    .reduce(finalPrice, 0);
   return (
     <OrderContext.Provider value={[ordersState, dispatchOrders]}>
       <div className="containerStyle">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRouteMatch } from "react-router-dom";
 import "./components-styles/containerStyle.css";
 import { Login } from "./Login";
@@ -14,13 +14,19 @@ export const OrderOnline = (props) => {
   const { url, path } = useRouteMatch();
   const [option, setOption] = useState("");
 
-  const signUpHandler = (value) => {
-    setIsSignupActive(value);
-  };
+  const signUpHandler = useCallback(
+    (value) => {
+      setIsSignupActive(value);
+    },
+    [isSignupActive]
+  );
 
-  const logInHandler = (value) => {
-    setIsLoginActive(value);
-  };
+  const logInHandler = useCallback(
+    (value) => {
+      setIsLoginActive(value);
+    },
+    [isLoginActive]
+  );
   useEffect(() => {
     optionHandler();
   }, []);

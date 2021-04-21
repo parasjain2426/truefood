@@ -1,10 +1,10 @@
-import React from "react";
+import React, { memo } from "react";
 import { useSpring, animated } from "react-spring";
 import { Footer } from "./sub-components/Footer";
 import { TrueHeader } from "./sub-components/TrueHeader";
 import { TrueOptions } from "./sub-components/TrueOptions";
 
-export const Home = (props) => {
+export const Home = memo((props) => {
   const fade = useSpring({
     from: {
       opacity: 0
@@ -18,4 +18,4 @@ export const Home = (props) => {
       <Footer />
     </animated.div>
   );
-};
+});
