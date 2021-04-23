@@ -8,14 +8,7 @@ export const SecondaryHeader = ({ logInHandler, signUpHandler }) => {
   const [state, dispatch] = useContext(LogInContext);
   return (
     <Fragment>
-      <h1
-        style={{
-          fontFamily: "Trebuchet MS",
-          fontSize: "2em",
-          margin: "0px",
-          float: "left"
-        }}
-      >
+      <h1 style={secondaryHeaderStyle}>
         <em>true</em>FOOD
         <p style={{ fontSize: "0.5em" }}>Deliever best at your doorsteps!</p>
       </h1>
@@ -51,4 +44,11 @@ export const SecondaryHeader = ({ logInHandler, signUpHandler }) => {
       </div>
     </Fragment>
   );
+};
+
+const secondaryHeaderStyle = {
+  fontFamily: "Trebuchet MS",
+  fontSize: "2em",
+  margin: "0px",
+  float: "left"
 };

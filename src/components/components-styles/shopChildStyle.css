@@ -4,3 +4,10 @@
   min-height: 300px;
   overflow: auto;
 }
+
+.shop-child-order {
+  float: right;
+  display: flex;
+  justify-content: space-evenly;
+  width: 40%;
+}

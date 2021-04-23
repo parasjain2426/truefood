@@ -3,7 +3,6 @@ import React, {
   useContext,
   useEffect,
   useReducer,
-  useMemo,
   useState
 } from "react";
 import { Rating } from "@material-ui/lab";
@@ -15,12 +14,12 @@ import "../components/components-styles/shopButtonStyle.css";
 import "../components/components-styles/orderChildStyle.css";
 import { SecondaryHeader } from "./sub-components/SecondaryHeader";
 import {
-  Link,
   NavLink,
   Redirect,
   useLocation,
   useRouteMatch
 } from "react-router-dom";
+import { BsFillTriangleFill } from "react-icons/bs";
 import { Button } from "@material-ui/core";
 import { OrderRouter } from "../routers/OrderRouter";
 import { toast } from "react-toastify";
@@ -209,15 +208,7 @@ export const Shop = (props) => {
                 Share
               </Button>
             </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-evenly",
-                margin: "10px 0px",
-                height: "50px",
-                alignItems: "flex-end"
-              }}
-            >
+            <div className="nav-style">
               <NavLink
                 to={`${url}/overview`}
                 className="link"
@@ -287,28 +278,18 @@ export const Shop = (props) => {
               display: processedOrders.length > 0 ? "block" : "none"
             }}
           >
-            <div
-              style={{
-                float: "left",
-                margin: "5px",
-                display: "flex",
-                justifyContent: "space-evenly",
-                width: "25%"
-              }}
-            >
+            <div className="order-bar">
               <Button variant="outlined" onClick={showProcessedOrderHandler}>
-                ^
+                <BsFillTriangleFill />
               </Button>
               <div style={{ margin: "10px 5px" }}>
                 Orders: <b>{processedOrders.length}</b>
               </div>
             </div>
             <div
+              className="order-bar"
               style={{
                 float: "right",
-                margin: "5px",
-                display: "flex",
-                justifyContent: "space-evenly",
                 width: "30%"
               }}
             >

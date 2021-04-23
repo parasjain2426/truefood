@@ -22,14 +22,7 @@ export const OrderChild = (props) => {
             <li key={order.id}>
               <div>
                 <div style={{ float: "left" }}>{order.name}</div>
-                <div
-                  style={{
-                    float: "right",
-                    display: "flex",
-                    justifyContent: "space-evenly",
-                    width: "40%"
-                  }}
-                >
+                <div className="shop-child-order">
                   <p>
                     <b>Rs.{order.price}</b>
                   </p>
