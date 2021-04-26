@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { SearchBox } from "./SearchBox";
-import "../components-styles/headerStyle.css";
+import "../components-styles/headerStyle.scss";
 
 export const TrueHeader = (props) => {
   const [serveDestination, setServeDestination] = useState("India");
@@ -12,7 +12,6 @@ export const TrueHeader = (props) => {
           <h1
             style={{
               fontFamily: "Trebuchet MS",
-              fontSize: "4em",
               margin: "0px"
             }}
           >
