@@ -1,6 +1,6 @@
-export const authAPI = () => {
+export async function authAPI() {
   const url = "https://www.universal-tutorial.com/api/getaccesstoken";
-  return fetch(url, {
+  return await fetch(url, {
     headers: {
       Accept: "application/json",
       "api-token":
@@ -8,9 +8,9 @@ export const authAPI = () => {
       "user-email": "healthyprogramming@gmail.com"
     }
   }).then((response) => response.json());
-};
+}
 
-export const cityAPI = (authToken) => {
+export async function cityAPI(authToken) {
   const url =
     "https://www.universal-tutorial.com/api/cities/Andaman and Nicobar Islands";
 
@@ -20,5 +20,5 @@ export const cityAPI = (authToken) => {
       Accept: "application/json"
     }
   }).then((response) => response.json());
-};
+}
 //cmrXSbxpZjND6QqZvVW8DaZ-8oboVddUVTMKwZv_fcEYe1MjSdQHQvMqY3nNjFM-nf4
