@@ -6,9 +6,6 @@ import React, {
   useState
 } from "react";
 import { Rating } from "@material-ui/lab";
-import { Login } from "./Login";
-import { Signup } from "./Signup";
-import "./components-styles/containerStyle.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/components-styles/shopButtonStyle.css";
 import "../components/components-styles/orderChildStyle.css";
@@ -32,13 +29,11 @@ import { useSpring, animated } from "react-spring";
 
 toast.configure();
 export const Shop = (props) => {
-  const [isSignupActive, setIsSignupActive] = useState(false);
-  const [isLoginActive, setIsLoginActive] = useState(false);
   const [isContent, setIsContent] = useState(true);
   const [ordersState, dispatchOrders] = useReducer(orderReducer, initialOrders);
   const { orders } = ordersState;
   const [showProcessedOrders, setShowProcessedOrders] = useState(false);
-  const [state] = useContext(LogInContext);
+  const { state, enableLogin } = useContext(LogInContext);
   const { shopData } = useLocation();
   const [shop, setShop] = useState({});
   const { url } = useRouteMatch();
@@ -62,19 +57,6 @@ export const Shop = (props) => {
   const finalPrice = (total, num) => {
     return total + num;
   };
-  const signUpHandler = useCallback(
-    (value) => {
-      setIsSignupActive(value);
-    },
-    [isSignupActive]
-  );
-
-  const logInHandler = useCallback(
-    (value) => {
-      setIsLoginActive(value);
-    },
-    [isLoginActive]
-  );
 
   const reviewHandler = useCallback(() => {
     if (state.isLoggedIn) {
@@ -82,9 +64,9 @@ export const Shop = (props) => {
         position: "bottom-center"
       });
     } else {
-      setIsLoginActive(true);
+      enableLogin();
     }
-  }, [state, isLoginActive]);
+  }, [state]);
 
   const bookmarkHandler = useCallback(() => {
     if (state.isLoggedIn) {
@@ -92,9 +74,9 @@ export const Shop = (props) => {
         position: "bottom-center"
       });
     } else {
-      setIsLoginActive(true);
+      enableLogin();
     }
-  }, [state, isLoginActive]);
+  }, [state]);
 
   const shareHandler = useCallback(() => {
     if (state.isLoggedIn) {
@@ -102,9 +84,9 @@ export const Shop = (props) => {
         position: "bottom-center"
       });
     } else {
-      setIsLoginActive(true);
+      enableLogin();
     }
-  }, [state, isLoginActive]);
+  }, [state]);
 
   const showProcessedOrderHandler = useCallback(() => {
     setShowProcessedOrders(!showProcessedOrders);
@@ -122,9 +104,9 @@ export const Shop = (props) => {
         position: "top-center"
       });
     } else {
-      setIsLoginActive(true);
+      enableLogin();
     }
-  }, [ordersState, state, showProcessedOrders, isLoginActive]);
+  }, [ordersState, state, showProcessedOrders]);
 
   const processedOrders = orders.filter((order) => order.isprocessed === true);
   const subTotal = processedOrders
@@ -134,12 +116,9 @@ export const Shop = (props) => {
     .reduce(finalPrice, 0);
   return (
     <OrderContext.Provider value={[ordersState, dispatchOrders]}>
-      <div className="containerStyle">
+      <div>
         <div style={boxStyle}>
-          <SecondaryHeader
-            signUpHandler={signUpHandler}
-            logInHandler={logInHandler}
-          />
+          <SecondaryHeader />
           <div
             style={{ width: "90%", margin: "0px auto" }}
             className="container"
@@ -247,8 +226,6 @@ export const Shop = (props) => {
             </div>
             <OrderRouter />
           </div>
-          <Login active={isLoginActive} setActive={logInHandler} />
-          <Signup active={isSignupActive} setActive={signUpHandler} />
           <div>{isContent ? null : <Redirect to="/error" />}</div>
           <animated.div style={yourOrderStyle}>
             <h3>Your Orders</h3>

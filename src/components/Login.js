@@ -1,15 +1,14 @@
 import { Button, TextField } from "@material-ui/core";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AiFillCloseCircle } from "react-icons/ai";
-import { useHistory } from "react-router-dom";
 import { logInUser } from "../actions/actionCreator";
 import { LogInContext } from "../contexts/LogInContext";
 import "./components-styles/containerStyle.css";
 
 export const Login = ({ active, setActive }) => {
   // const { push, goBack } = useHistory();
-  const [state, dispatch] = useContext(LogInContext);
+  const { dispatch } = useContext(LogInContext);
   const {
     register,
     formState: { errors },
