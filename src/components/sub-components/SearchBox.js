@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import {
   FormControl,
@@ -10,8 +10,27 @@ import {
 } from "@material-ui/core";
 import { ImLocation } from "react-icons/im";
 import "../components-styles/searchBoxStyle.css";
+import { authAPI, cityAPI } from "../../services/APIService";
 
 export const SearchBox = (props) => {
+  const [authToken, setAuthToken] = useState({ auth_token: "" });
+  const [cities, setCities] = useState([]);
+
+  useEffect(() => {
+    authAPI().then((data) => {
+      setAuthToken(data);
+    });
+  }, []);
+
+  useEffect(() => {
+    cityAPI(authToken.auth_token).then((data) => {
+      if (!data?.error) {
+        setCities(data);
+      }
+    });
+  }, [authToken]);
+  // console.log(cities);
+
   const {
     register,
     formState: { errors },
@@ -59,10 +78,11 @@ export const SearchBox = (props) => {
                 style={{ minWidth: "50px", width: "100px" }}
                 labelId="city-select"
               >
-                <MenuItem value="Delhi">Delhi</MenuItem>
-                <MenuItem value="Ghaziabad">Ghaziabad</MenuItem>
-                <MenuItem value="Meerut">Meerut</MenuItem>
-                <MenuItem value="Noida">Noida</MenuItem>
+                {cities.map((city) => (
+                  <MenuItem value={city.city_name} key={city.city_name}>
+                    {city.city_name}
+                  </MenuItem>
+                ))}
               </Select>
             )}
             name="city"
