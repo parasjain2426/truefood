@@ -29,14 +29,18 @@ export const SearchBox = (props) => {
       }
     });
   }, [authToken]);
-  // console.log(cities);
+  // console.log(cities[0].city_name);
+  const defaultValues = {
+    location: "Paras",
+    city: "Rangat"
+  };
 
   const {
     register,
     formState: { errors },
     handleSubmit,
     control
-  } = useForm();
+  } = useForm({ defaultValues });
   const cityValidator = (city) => {
     if (city === "") {
       return "Please select the city";
@@ -71,12 +75,12 @@ export const SearchBox = (props) => {
         >
           <InputLabel id="city-select">City</InputLabel>
           <Controller
-            render={({ field: { onChange, value } }) => (
+            render={({ field }) => (
               <Select
-                value={value}
-                onChange={onChange}
+                {...field}
                 style={{ minWidth: "50px", width: "100px" }}
                 labelId="city-select"
+                // defaultValue="Rangat"
               >
                 {cities.map((city) => (
                   <MenuItem value={city.city_name} key={city.city_name}>
@@ -86,7 +90,6 @@ export const SearchBox = (props) => {
               </Select>
             )}
             name="city"
-            defaultValue=""
             control={control}
             rules={{
               validate: cityValidator,

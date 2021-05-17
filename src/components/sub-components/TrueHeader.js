@@ -6,7 +6,7 @@ export const TrueHeader = (props) => {
   const [serveDestination, setServeDestination] = useState("India");
 
   return (
-    <Fragment>
+    <div>
       <header className="headerStyle">
         <main style={{ clear: "both", textAlign: "center", color: "white" }}>
           <h1
@@ -21,6 +21,6 @@ export const TrueHeader = (props) => {
           <SearchBox setServeDestination={setServeDestination} />
         </main>
       </header>
-    </Fragment>
+    </div>
   );
 };
